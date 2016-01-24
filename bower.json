@@ -1,0 +1,12 @@
+{
+  "name": "FluxReactStudy",
+  "authors": [
+    "hyojun.lee <hyojun@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "homepage": "https://github.com/hyojun/FluxReactStudy",
+  "private": true,
+  "dependencies": {
+  }
+}
