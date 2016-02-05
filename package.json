@@ -26,7 +26,7 @@
   },
   "scripts": {
     "install": "bower install",
-    "start": "webpack-dev-server --hot --inline --content-base build/",
+    "start": "webpack-dev-server --hot --inline --config webpack.dev.config.js --content-base build/",
     "lint": "eslint src/**; exit 0",
     "build": "webpack"
   },
