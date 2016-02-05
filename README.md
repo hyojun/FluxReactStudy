@@ -13,7 +13,9 @@
  * BracketHighlighter
  * SublimeLinter
  * SublimeLinter-eslint
-3. Skeleton Project
-```
-npm install
-```
+3. Project setting
+ * `npm install`
+4. Build commands
+ * `npm run lint`
+ * `npm run build`
+ * `npm run start`
