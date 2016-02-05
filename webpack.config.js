@@ -39,8 +39,5 @@ module.exports = {
   eslint: {
     configFile: '.eslintrc',
     failOnError: true
-  },
-  plugins: [
-    new webpack.optimize.UglifyJsPlugin({minimize: true})
-  ]
+  }
 };
