@@ -35,8 +35,8 @@ let p = new Polygon(3,4);
 document.write(p.toString());
 
 //let testasfasd = Test.newInstance(9,10);
-let testasfasd = new Test(9,10);
-document.write(' '+testasfasd.height);
+let testasfasd = Test.newInstance();
+document.write(' '+testasfasd.toString());
 
 
 //

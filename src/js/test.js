@@ -1,4 +1,9 @@
 export default class Test {
+  
+  static newInstance(){
+    return new Test(1,2);
+  }
+
 
   constructor(height, width){
     this.height = height;
@@ -9,9 +14,7 @@ export default class Test {
     return 'this.height:' + this.height + 'this.width:' + this.width;
   }
 
-  static asldkajsdlkajsdakljsd() {
-    return 'getVariable';
-  }
+
 }
 
 // //factory method pattern
