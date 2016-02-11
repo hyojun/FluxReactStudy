@@ -1,7 +1,15 @@
-var webpack = require("webpack");
-
-module.exports = {
+var webpack = require("webpack"),
+  definePlugin = new webpack.DefinePlugin({
+    __ENV__: {
+      phase: JSON.stringify(process.env.PHASE || 'local'),
+      version: JSON.stringify(process.env.VERSION || 'v1')
+    }
+  }),
+  config = {
   context: __dirname + "/src",
+  resolve: {
+    root: __dirname + "/src"
+  },
   entry: {
     javascript: "./js/app.js",
     html: "./index.html"
@@ -41,6 +49,12 @@ module.exports = {
     failOnError: true
   },
   plugins: [
-    new webpack.optimize.UglifyJsPlugin({minimize: true})
+    definePlugin
   ]
 };
+
+if (process.env.PHASE === 'release') {
+  config.plugins.push(new webpack.optimize.UglifyJsPlugin({minimize: true}));
+}
+
+module.exports = config;
