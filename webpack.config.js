@@ -31,6 +31,11 @@ module.exports = {
         exclude: /node-modules/
       },
       {
+        test: /\.css$/,
+        loader: "bootstrap",
+        exclude: /node-modules/
+      },
+      {
         test: /\.html$/,
         loader: "file?name=[name].[ext]"
       },

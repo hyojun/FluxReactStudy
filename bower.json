@@ -8,5 +8,6 @@
   "homepage": "https://github.com/hyojun/FluxReactStudy",
   "private": true,
   "dependencies": {
+    "jquery": "~2.2.0"
   }
 }

@@ -1,42 +1,56 @@
 //import ReactDOM from 'react-dom';
 // import Greeting from './greeting';
-import Test from './test';
+//import React from 'react';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
+import TestButton from './TestButton.js';
+
+var testReactElement = React.createElement(TestButton);
+var boolasd = React.isValidElement(testReactElement);
+
+var testButton = new TestButton();
+var testReactClass = React.createClass(testButton);
+var testReactElement = React.createElement(testReactClass);
+
+ReactDOM.render(testReactElement , document.getElementById('study_container'));
+
+document.write(''+boolasd);
 // ReactDOM.render(
 //   <Greeting name='World'/>,
 //   document.body
 // );
 //document.write(''+Test.pi);
-document.write('Hello World!!!');
-document.write('\n');
+// document.write('Hello World!!!');
+// document.write('\n');
 // let test = new Test();
 // let a = test.getA();
 
-class Polygon {
+// class Polygon {
+//
+//   //직접 접근이 안되면서 안에서는 사용할 수 있도록
+//   // user = {
+//   //   name = 'name',
+//   //   age = 'age'
+//   // };
+//   constructor(height, width) {
+//     this.height = height;
+//     this.width = width;
+//     let xx = this.height;
+//     document.write(' ' + xx + ' ');
+//   }
+//
+//   toString() {
+//     return 'this.height:' + this.height + 'this.width:' + this.width;
+//   }
+// }
 
-  //직접 접근이 안되면서 안에서는 사용할 수 있도록
-  // user = {
-  //   name = 'name',
-  //   age = 'age'
-  // };
-  constructor(height, width) {
-    this.height = height;
-    this.width = width;
-    let xx = this.height;
-    document.write(' ' + xx + ' ');
-  }
+// let p = new Polygon(3,4);
+// document.write(p.toString());
 
-  toString() {
-    return 'this.height:' + this.height + 'this.width:' + this.width;
-  }
-}
 
-let p = new Polygon(3,4);
-document.write(p.toString());
 
 //let testasfasd = Test.newInstance(9,10);
-let testasfasd = Test.newInstance();
-document.write(' '+testasfasd.toString());
 
 
 //

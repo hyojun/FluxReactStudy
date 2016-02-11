@@ -2,6 +2,7 @@ var webpack = require("webpack");
 
 module.exports = {
   context: __dirname + "/src",
+{
   entry: {
     javascript: "./js/app.js",
     html: "./index.html"
@@ -10,7 +11,8 @@ module.exports = {
   output: {
     path: __dirname + "/build",
     filename: "app.js"
-  },
+  }
+},
   module: {
     preLoaders: [
       {
