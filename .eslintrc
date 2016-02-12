@@ -38,8 +38,5 @@
     },
     "plugins": [
         "react"
-    ],
-    "globals": {
-        "React": "true"
-    }
+    ]
 }
