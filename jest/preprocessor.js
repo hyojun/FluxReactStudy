@@ -1,4 +1,3 @@
-//require('babel-register'); // support ES6 'import' statements
 var babelJest = require('babel-jest');
 var webpackAlias = require('jest-webpack-alias');
 
