@@ -6,16 +6,8 @@ import ReactDOM from 'react-dom';
 
 import TestButton from './TestButton.js';
 
-var testReactElement = React.createElement(TestButton);
-var boolasd = React.isValidElement(testReactElement);
+ReactDOM.render(<TestButton/> , document.getElementById('study_container'));
 
-var testButton = new TestButton();
-var testReactClass = React.createClass(testButton);
-var testReactElement = React.createElement(testReactClass);
-
-ReactDOM.render(testReactElement , document.getElementById('study_container'));
-
-document.write(''+boolasd);
 // ReactDOM.render(
 //   <Greeting name='World'/>,
 //   document.body
