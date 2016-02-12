@@ -16,9 +16,9 @@
 3. Project setting
  * `npm install`
 4. Build commands
- * `npm run lint`
  * `npm run build`
  * `npm run start`
+ * `npm run test`
 
 ## Naming Convention
 - 클래스 내부적으로 사용하는 변수와 함수는(자바에서 private) 앞에 `_`를 붙인다 (e.g. _onSave)
