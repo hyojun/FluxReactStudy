@@ -1,49 +1,47 @@
-import React, { PropTypes } from 'react';
-//import moment from 'moment';
+import React from 'react';
 import createDateObjects from './createDateObjects';
 
-var Calendar = React.createClass({ //https://facebook.github.io/react/docs/reusable-components.html#es6-classes
+export default class Calendar extends React.Component {
 
-  propTypes: {
-    weekOffset: PropTypes.number.isRequired,
-    date: PropTypes.object.isRequired,
-    renderDay: PropTypes.func,
-    onNextMonth: PropTypes.func.isRequired,
-    onPrevMonth: PropTypes.func.isRequired,
-    onPickDate: PropTypes.func
-  },
+    constructor(prop) {
+      super(prop);
+    }
 
-  getDefaultProps: function() {
-    return {
-      weekOffset: 0,
-      renderDay: day => day.format('MM월 DD일')
-    };
-  },
-
-  render : function() {
-    const { date, weekOffset, renderDay, onNextMonth, onPrevMonth, onPickDate } = this.props;
-    return (
-      <div className='Calendar'>
-        <div className='Calendar-header'>
-          <button onClick={onPrevMonth}>&laquo;</button>
-          <div className='Calendar-header-currentDate'>{date.format('YYYY년 MM월')}</div>
-          <button onClick={onNextMonth}>&raquo;</button>
+    render() {
+      const { date, weekOffset, renderDay, onNextMonth, onPrevMonth, onPickDate } = this.props;
+      return (
+        <div className='Calendar'>
+          <div className='Calendar-header'>
+            <button onClick={onPrevMonth}>&laquo;</button>
+            <div className='Calendar-header-currentDate'>{date.format('YYYY년 MM월')}</div>
+            <button onClick={onNextMonth}>&raquo;</button>
+          </div>
+          <div className='Calendar-grid'>
+            {createDateObjects(date, weekOffset).map((day, i) =>
+              <div
+                key={`day-${i}`}
+                className={`Calendar-grid-item ${day.classNames || ''}`}
+                onClick={() => onPickDate(day.day)}
+              >
+                {renderDay(day.day)}
+              </div>
+            )}
+          </div>
         </div>
-        <div className='Calendar-grid'>
-          {createDateObjects(date, weekOffset).map((day, i) =>
-            <div
-              key={`day-${i}`}
-              className={`Calendar-grid-item ${day.classNames || ''}`}
-              onClick={() => onPickDate(day.day)}
-            >
-              {renderDay(day.day)}
-            </div>
-          )}
-        </div>
-      </div>
-    );
-  }
+      );
+    }
+}
 
-});
+Calendar.propTypes = {
+  weekOffset: React.PropTypes.number.isRequired,
+  date: React.PropTypes.object.isRequired,
+  renderDay: React.PropTypes.func,
+  onNextMonth: React.PropTypes.func.isRequired,
+  onPrevMonth: React.PropTypes.func.isRequired,
+  onPickDate: React.PropTypes.func
+};
 
-module.exports = Calendar;
+Calendar.defaultProps = {
+  weekOffset: 0,
+  renderDay: day => day.format('MM월 DD일')
+};
