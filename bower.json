@@ -8,6 +8,8 @@
   "homepage": "https://github.com/hyojun/FluxReactStudy",
   "private": true,
   "dependencies": {
-    "jquery": "~2.2.0"
+    "startbootstrap-sb-admin-2": "~1.0.8",
+    "bootstrap": "~3.3.6",
+    "font-awesome": "~4.2.0"
   }
 }
