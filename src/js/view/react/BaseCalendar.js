@@ -5,7 +5,7 @@ import Calendar from './calendar/Calendar';
 import Moment from 'moment';
 import 'moment/locale/nb';
 
-require('../../less/calendar_style.css');
+require('res/css/calendar_style.css');
 
 export default class BaseCalendar extends React.Component {
 

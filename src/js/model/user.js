@@ -5,7 +5,7 @@ export default class User extends Backbone.Model {
   constructor(options) {
     super(options);
     this.urlRoot = User.URL_ROOT;
-    this.idAttribute = 'no'; //default id
+    this.idAttribute = 'no';
     this.parse = function(response) {
       return response.data;
     };
