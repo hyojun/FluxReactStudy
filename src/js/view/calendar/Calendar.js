@@ -3,33 +3,33 @@ import createDateObjects from './createDateObjects';
 
 export default class Calendar extends React.Component {
 
-    constructor(prop) {
-      super(prop);
-    }
+  constructor(prop) {
+    super(prop);
+  }
 
-    render() {
-      const { date, weekOffset, renderDay, onNextMonth, onPrevMonth, onPickDate } = this.props;
-      return (
-        <div className='Calendar'>
-          <div className='Calendar-header'>
-            <button onClick={onPrevMonth}>&laquo;</button>
-            <div className='Calendar-header-currentDate'>{date.format('YYYY년 MM월')}</div>
-            <button onClick={onNextMonth}>&raquo;</button>
-          </div>
-          <div className='Calendar-grid'>
-            {createDateObjects(date, weekOffset).map((day, i) =>
-              <div
-                key={`day-${i}`}
-                className={`Calendar-grid-item ${day.classNames || ''}`}
-                onClick={() => onPickDate(day.day)}
-              >
-                {renderDay(day.day)}
-              </div>
-            )}
-          </div>
+  render() {
+    const { date, weekOffset, renderDay, onNextMonth, onPrevMonth, onPickDate } = this.props;
+    return (
+      <div className='Calendar'>
+        <div className='Calendar-header'>
+          <button onClick={onPrevMonth}>&laquo;</button>
+          <div className='Calendar-header-currentDate'>{date.format('YYYY년 MM월')}</div>
+          <button onClick={onNextMonth}>&raquo;</button>
         </div>
-      );
-    }
+        <div className='Calendar-grid'>
+          {createDateObjects(date, weekOffset).map((day, i) =>
+            <div
+              key={`day-${i}`}
+              className={`Calendar-grid-item ${day.classNames || ''}`}
+              onClick={() => onPickDate(day.day)}
+            >
+              {renderDay(day.day)}
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
 }
 
 Calendar.propTypes = {
