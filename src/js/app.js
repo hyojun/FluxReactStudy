@@ -1,6 +1,6 @@
-import User from './model/user';
+import User from 'js/model/user';
 import React from 'react';
-import UserCollection from './model/userCollection';
+import UserCollection from 'js/model/userCollection';
 import $ from 'jquery';
 
 var user1 = new User({name: 'name1', email: 'email1'}),

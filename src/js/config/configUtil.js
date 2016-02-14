@@ -1,4 +1,4 @@
-import Config from './config';
+import Config from 'js/config/config';
 
 export default class ConfigUtil {
   static getApiUrl() {

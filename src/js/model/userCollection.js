@@ -1,5 +1,5 @@
 import Backbone from 'backbone';
-import User from './user';
+import User from 'js/model/user';
 
 export default class UserCollection extends Backbone.Collection {
   constructor(options) {

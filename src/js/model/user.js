@@ -1,5 +1,5 @@
 import Backbone from 'backbone';
-import ConfigUtil from '../config/configUtil';
+import ConfigUtil from 'js/config/configUtil';
 
 export default class User extends Backbone.Model {
   constructor(options) {
