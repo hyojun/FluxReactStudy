@@ -1,6 +1,9 @@
 import React from 'react';
 import createDateObjects from './createDateObjects';
 
+const FORMAT_DATE = 'YYYY년 MM월';
+const FORMAT_DAY = 'MM월 DD일';
+
 export default class Calendar extends React.Component {
 
   constructor(prop) {
@@ -13,7 +16,7 @@ export default class Calendar extends React.Component {
       <div className='Calendar'>
         <div className='Calendar-header'>
           <button onClick={onPrevMonth}>&laquo;</button>
-          <div className='Calendar-header-currentDate'>{date.format('YYYY년 MM월')}</div>
+          <div className='Calendar-header-currentDate'>{date.format(FORMAT_DATE)}</div>
           <button onClick={onNextMonth}>&raquo;</button>
         </div>
         <div className='Calendar-grid'>
@@ -43,5 +46,5 @@ Calendar.propTypes = {
 
 Calendar.defaultProps = {
   weekOffset: 0,
-  renderDay: day => day.format('MM월 DD일')
+  renderDay: day => day.format(FORMAT_DAY)
 };
