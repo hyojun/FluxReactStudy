@@ -41,10 +41,11 @@ export default class Calendar extends React.Component {
     let diff = startOfMonth.weekday() - weekOffset;
     if (diff < 0) diff += 7;
 
-    const prevMonthDays = Immutable.Range(0,diff)
-      .map(index => {
-        day : new Moment([date.year(), date.month(), index]);
-      });
+    const prevMonthDays = Immutable.Range(0, diff)
+      .map(n => ({
+        day: startOfMonth.clone().subtract(diff - n, 'days'),
+        classNames: 'prevMonth'
+      }));
 
     const currentMonthDays = Immutable.Range(1, date.daysInMonth() + 1)
       .map(index => ({
