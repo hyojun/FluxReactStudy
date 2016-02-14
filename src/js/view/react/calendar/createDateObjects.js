@@ -1,5 +1,4 @@
-import { range, takeWhile, last } from 'lodash';
-//import Immutable from 'immutable';
+import Immutable from 'immutable';
 import Moment from 'moment';
 
 export default function createDateObjects(date, weekOffset = 0) {
@@ -8,20 +7,24 @@ export default function createDateObjects(date, weekOffset = 0) {
   let diff = startOfMonth.weekday() - weekOffset;
   if (diff < 0) diff += 7;
 
-  const prevMonthDays = range(0, diff).map(n => ({
-    day: startOfMonth.clone().subtract(diff - n, 'days'),
-    classNames: 'prevMonth'
-  }));
+  const prevMonthDays = Immutable.Range(0,diff)
+    .map(index => {
+      day : new Moment([date.year(), date.month(), index]);
+    });
 
-  const currentMonthDays = range(1, date.daysInMonth() + 1).map(index => ({
-    day: new Moment([date.year(), date.month(), index])
-  }));
+  const currentMonthDays = Immutable.Range(1, date.daysInMonth() + 1)
+    .map(index => ({
+      day: new Moment([date.year(), date.month(), index])
+    }));
 
-  const daysAdded = prevMonthDays.length + currentMonthDays.length - 1;
-  const nextMonthDays = takeWhile(range(1, 7), n => (daysAdded + n) % 7 !== 0).map((n) => ({
-    day: last(currentMonthDays).day.clone().add(n, 'days'),
-    classNames: 'nextMonth'
-  }));
+  const daysAdded = prevMonthDays.size + currentMonthDays.size - 1;
+
+  const nextMonthDays  = Immutable.Range(1, 7)
+    .filter(n => (daysAdded + n) % 7 !== 0)
+    .map(n => ({
+      day: currentMonthDays.last().day.clone().add(n, 'days'),
+      classNames: 'nextMonth'
+    }));
 
   return [...prevMonthDays, ...currentMonthDays, ...nextMonthDays];
 }
