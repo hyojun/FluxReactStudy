@@ -12,7 +12,7 @@ var webpack = require("webpack"),
     root: __dirname + "/src"
   },
   entry: {
-    javascript: "./src/app.js",
+    javascript: "./src/js/app.js",
     html: "./src/index.html"
   },
   devtool: "source-map",
