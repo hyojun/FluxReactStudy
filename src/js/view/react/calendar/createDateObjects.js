@@ -1,5 +1,6 @@
 import { range, takeWhile, last } from 'lodash';
-import moment from 'moment';
+//import Immutable from 'immutable';
+import Moment from 'moment';
 
 export default function createDateObjects(date, weekOffset = 0) {
   const startOfMonth = date.startOf('month');
@@ -13,7 +14,7 @@ export default function createDateObjects(date, weekOffset = 0) {
   }));
 
   const currentMonthDays = range(1, date.daysInMonth() + 1).map(index => ({
-    day: moment([date.year(), date.month(), index])
+    day: new Moment([date.year(), date.month(), index])
   }));
 
   const daysAdded = prevMonthDays.length + currentMonthDays.length - 1;
