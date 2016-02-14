@@ -1,5 +1,6 @@
 import React from 'react';
-import createDateObjects from './createDateObjects';
+import Immutable from 'immutable';
+import Moment from 'moment';
 
 const FORMAT_DATE = 'YYYY년 MM월';
 const FORMAT_DAY = 'MM월 DD일';
@@ -20,7 +21,7 @@ export default class Calendar extends React.Component {
           <button onClick={onNextMonth}>&raquo;</button>
         </div>
         <div className='Calendar-grid'>
-          {createDateObjects(date, weekOffset).map((day, i) =>
+          {this._createDateObjects(date, weekOffset).map((day, i) =>
             <div
               key={`day-${i}`}
               className={`Calendar-grid-item ${day.classNames || ''}`}
@@ -33,6 +34,35 @@ export default class Calendar extends React.Component {
       </div>
     );
   }
+
+  _createDateObjects(date, weekOffset = 0) {
+    const startOfMonth = date.startOf('month');
+
+    let diff = startOfMonth.weekday() - weekOffset;
+    if (diff < 0) diff += 7;
+
+    const prevMonthDays = Immutable.Range(0,diff)
+      .map(index => {
+        day : new Moment([date.year(), date.month(), index]);
+      });
+
+    const currentMonthDays = Immutable.Range(1, date.daysInMonth() + 1)
+      .map(index => ({
+        day: new Moment([date.year(), date.month(), index])
+      }));
+
+    const daysAdded = prevMonthDays.size + currentMonthDays.size - 1;
+
+    const nextMonthDays  = Immutable.Range(1, 7)
+      .filter(n => (daysAdded + n) % 7 !== 0)
+      .map(n => ({
+        day: currentMonthDays.last().day.clone().add(n, 'days'),
+        classNames: 'nextMonth'
+      }));
+
+    return [...prevMonthDays, ...currentMonthDays, ...nextMonthDays];
+  }
+
 }
 
 Calendar.propTypes = {
