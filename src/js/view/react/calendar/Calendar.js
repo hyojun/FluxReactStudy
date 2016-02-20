@@ -1,9 +1,9 @@
 import React from 'react';
 import Immutable from 'immutable';
 import Moment from 'moment';
+import GridItem from './GridItem';
 
 const FORMAT_DATE = 'YYYY년 MM월';
-const FORMAT_DAY = 'MM월 DD일';
 
 export default class Calendar extends React.Component {
 
@@ -12,7 +12,9 @@ export default class Calendar extends React.Component {
   }
 
   render() {
-    const { date, weekOffset, renderDay, onNextMonth, onPrevMonth, onPickDate } = this.props;
+    const { date, weekOffset, renderDay, onNextMonth, onPrevMonth } = this.props;
+    const dateArr = this._createDateObjects(date, weekOffset);
+
     return (
       <div className='Calendar'>
         <div className='Calendar-header'>
@@ -21,14 +23,13 @@ export default class Calendar extends React.Component {
           <button onClick={onNextMonth}>&raquo;</button>
         </div>
         <div className='Calendar-grid'>
-          {this._createDateObjects(date, weekOffset).map((day, i) =>
-            <div
-              key={`day-${i}`}
-              className={`Calendar-grid-item ${day.classNames || ''}`}
-              onClick={() => onPickDate(day.day)}
-            >
-              {renderDay(day.day)}
-            </div>
+          {dateArr.map((oDay, mIndex) =>
+            <GridItem
+              key={`day-${mIndex}`}
+              day={oDay}
+              className={`Calendar-grid-item ${oDay.classNames || ''}`}
+              renderDay={renderDay}
+            />
           )}
         </div>
       </div>
@@ -36,8 +37,9 @@ export default class Calendar extends React.Component {
   }
 
   _createDateObjects(date, weekOffset = 0) {
-    const startOfMonth = date.startOf('month');
+    var dateArr = [];
 
+    const startOfMonth = date.startOf('month');
     let diff = startOfMonth.weekday() - weekOffset;
     if (diff < 0) diff += 7;
 
@@ -52,8 +54,7 @@ export default class Calendar extends React.Component {
         day: new Moment([date.year(), date.month(), index])
       }));
 
-    const daysAdded = prevMonthDays.size + currentMonthDays.size - 1;
-
+    const daysAdded = prevMonthDays.size + currentMonthDays.size;
     const nextMonthDays  = Immutable.Range(1, 7)
       .filter(n => (daysAdded + n) % 7 !== 0)
       .map(n => ({
@@ -61,7 +62,18 @@ export default class Calendar extends React.Component {
         classNames: 'nextMonth'
       }));
 
-    return [...prevMonthDays, ...currentMonthDays, ...nextMonthDays];
+    for(let i=0;i<prevMonthDays.count();i++){
+      dateArr.push(prevMonthDays.get(i));
+    }
+    for(let i=0;i<currentMonthDays.count();i++){
+      dateArr.push(currentMonthDays.get(i));
+    }
+    for(let i=0;i<nextMonthDays.count();i++){
+      dateArr.push(nextMonthDays.get(i));
+    }
+
+    console.log(''+dateArr.length);
+    return dateArr;
   }
 
 }
@@ -69,13 +81,10 @@ export default class Calendar extends React.Component {
 Calendar.propTypes = {
   weekOffset: React.PropTypes.number.isRequired,
   date: React.PropTypes.object.isRequired,
-  renderDay: React.PropTypes.func,
   onNextMonth: React.PropTypes.func.isRequired,
-  onPrevMonth: React.PropTypes.func.isRequired,
-  onPickDate: React.PropTypes.func
+  onPrevMonth: React.PropTypes.func.isRequired
 };
 
 Calendar.defaultProps = {
-  weekOffset: 0,
-  renderDay: day => day.format(FORMAT_DAY)
+  weekOffset: 0
 };
